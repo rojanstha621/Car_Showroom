@@ -5,26 +5,27 @@ import image4 from '../assets/ford.jpg';
 import image5 from '../assets/cooper.jpg';
 import image6 from '../assets/Mazda MX-5 Miata.jpg';
 import image7 from '../assets/Toyota RAV4.jpg';
+import image8 from '../assets/imageRed.jpg';
 
 const CarList = [
   {
     id: 1,
-    name: 'Audi A4',
-    price: '$45,000',
-    year: 2022,
-    mileage: '20,000 km',
+    name: 'Lamborghini Huracán EVO',
+    price: '$250,000',
+    year: 2023,
+    mileage: '3,000 km',
     fuel: 'Petrol',
-    image: image1,
-    highlight: 'German luxury and performance packed into a sporty sedan.',
-    tags: ['Sedan', 'Luxury', 'AWD', '2022'],
+    image: image8, // you can replace with real Lamborghini image later
+    highlight: 'Unmatched Italian performance and style with a roaring V10 engine.',
+    tags: ['Supercar', 'Luxury', 'V10', '2023'],
     specs: {
-      Engine: '2.0L TFSI Turbocharged I4',
-      Transmission: '7-Speed S Tronic Dual-Clutch',
-      Drivetrain: 'Quattro AWD',
-      Horsepower: '201 hp',
-      Infotainment: '10.1" MMI Touch Display',
-      Safety: 'Audi Pre Sense City & Basic',
-      Seating: '5',
+      Engine: '5.2L V10 Naturally Aspirated',
+      Transmission: '7-Speed Dual-Clutch (LDF)',
+      Drivetrain: 'All-Wheel Drive (AWD)',
+      Horsepower: '631 hp',
+      to60: '2.9 seconds',
+      TopSpeed: '202 mph',
+      Seating: '2',
     }
   },
   {
@@ -144,6 +145,27 @@ const CarList = [
       Seating: '5',
       CargoSpace: '69.8 cu. ft.',
       Infotainment: '8" Display with Apple CarPlay',
+    }
+  },
+
+  {
+    id: 8,
+    name: 'Audi A4',
+    price: '$45,000',
+    year: 2022,
+    mileage: '20,000 km',
+    fuel: 'Petrol',
+    image: image1,
+    highlight: 'German luxury and performance packed into a sporty sedan.',
+    tags: ['Sedan', 'Luxury', 'AWD', '2022'],
+    specs: {
+      Engine: '2.0L TFSI Turbocharged I4',
+      Transmission: '7-Speed S Tronic Dual-Clutch',
+      Drivetrain: 'Quattro AWD',
+      Horsepower: '201 hp',
+      Infotainment: '10.1" MMI Touch Display',
+      Safety: 'Audi Pre Sense City & Basic',
+      Seating: '5',
     }
   }
 ];

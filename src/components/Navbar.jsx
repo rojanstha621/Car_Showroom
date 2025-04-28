@@ -1,55 +1,88 @@
-// components/Navbar.jsx
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  const navItems = ['Models', 'Offers', 'Featured', 'Testimonials', 'About', 'Contact'];
+
   return (
-    <nav className="bg-black text-white shadow-md  pr-20 pl-20">
-      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+    <nav className="bg-black text-white shadow-md px-6 md:px-20 transition-all duration-300">
+      <div className="container mx-auto flex justify-between items-center py-4">
         {/* Brand Logo */}
         <Link to="/" className="flex items-center">
           <img
-            src={logo} 
+            src={logo}
             alt="Logo"
-            className="h-20 w-auto"
+            className="h-16 w-auto hover:scale-105 transition-transform duration-300"
           />
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-sm font-medium">
-          <li><Link to="/cars" className="hover:text-gold transition">Models</Link></li>
-          <li><Link to="/offers" className="hover:text-gold transition">Offers</Link></li>
-          <li><Link to="/featured" className="hover:text-gold transition">Featured</Link></li>
-          <li><Link to="/testimonials" className="hover:text-gold transition">Testimonials</Link></li>
-          <li><Link to="/about" className="hover:text-gold transition">About</Link></li>
-          <li><Link to="/contact" className="hover:text-gold transition">Contact</Link></li>
+        <ul className="hidden md:flex space-x-10 text-sm font-semibold tracking-wide">
+          {navItems.map((item, idx) => {
+            const path = `/${item.toLowerCase()}`;
+            const isActive = location.pathname === path;
+            return (
+              <li key={idx}>
+                <Link
+                  to={path}
+                  className={`relative group overflow-hidden ${
+                    isActive ? 'text-gold' : ''
+                  }`}
+                >
+                  <span className="transition-colors duration-300 group-hover:text-gold">
+                    {item}
+                  </span>
+                  <div
+                    className={`h-0.5 bg-gold transition-transform origin-left duration-300 ${
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                  ></div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Mobile Toggle Button */}
-        <button className="md:hidden text-gold text-2xl" onClick={toggleMenu}>
+        <button
+          className="md:hidden text-gold text-3xl focus:outline-none transition-transform duration-300 hover:rotate-90"
+          onClick={toggleMenu}
+        >
           {menuOpen ? <HiOutlineX /> : <HiOutlineMenu />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden px-6 pb-6 space-y-4">
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/cars" onClick={toggleMenu}>Models</Link></li>
-            <li><Link to="/offers" onClick={toggleMenu}>Offers</Link></li>
-            <li><Link to="/featured" onClick={toggleMenu}>Featured</Link></li>
-            <li><Link to="/testimonials" onClick={toggleMenu}>Testimonials</Link></li>
-            <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
-            <li><Link to="/contact" onClick={toggleMenu}>Contact</Link></li>
-          </ul>
-        </div>
-      )}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-500 ${menuOpen ? 'max-h-screen' : 'max-h-0'}`}
+      >
+        <ul className="flex flex-col space-y-4 py-4 px-6 text-base font-semibold">
+          {navItems.map((item, idx) => {
+            const path = `/${item.toLowerCase()}`;
+            const isActive = location.pathname === path;
+            return (
+              <li key={idx}>
+                <Link
+                  to={path}
+                  onClick={toggleMenu}
+                  className={`block transition-colors duration-300 ${
+                    isActive ? 'text-gold' : 'text-white hover:text-gold'
+                  }`}
+                >
+                  {item}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 };

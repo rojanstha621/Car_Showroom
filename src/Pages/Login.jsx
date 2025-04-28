@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -38,8 +39,17 @@ const Login = () => {
     <div className="min-h-screen bg-royal-black flex items-center justify-center px-4">
       <form
         onSubmit={handleLogin}
-        className="bg-royal-white text-royal-black p-8 rounded-lg shadow-lg w-full max-w-md"
+        className="relative bg-royal-white text-royal-black p-8 rounded-lg shadow-lg w-full max-w-md"
       >
+        {/* Back Button inside the form */}
+        <button
+          onClick={() => navigate("/")}
+          type="button"
+          className="absolute top-4 left-4 bg-royal-gold text-royal-black p-2 rounded-full hover:scale-110 transition duration-300"
+        >
+          <ArrowLeft size={20} />
+        </button>
+
         <h2 className="text-2xl font-bold text-center mb-6 text-royal-gold">Login to Royal Oak</h2>
 
         {error && <p className="text-red-600 mb-4 text-sm text-center">{error}</p>}

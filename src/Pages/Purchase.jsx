@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import dummyCars from './CarList';
+import { ArrowLeft } from 'lucide-react';
 
 const Purchase = () => {
   const { carId } = useParams();
@@ -31,7 +32,15 @@ const Purchase = () => {
 
   return (
     <div className="min-h-screen bg-[#e5e5e5] flex items-center justify-center px-4 py-12">
+
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-4xl">
+      <button
+          onClick={() => navigate("/models")}
+          type="button"
+          className="relative top-4 left-4 bg-royal-gold text-royal-black p-2 rounded-full hover:scale-110 transition duration-300"
+        >
+          <ArrowLeft size={20} />
+        </button>
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-center text-[#121212] mb-6">Application for Purchase</h1>
 

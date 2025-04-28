@@ -19,9 +19,9 @@ const Footer = () => {
         <div>
           <h4 className="text-white text-lg font-semibold mb-3">Quick Links</h4>
           <ul className="space-y-2">
-            <li><a href="/cars" className="hover:text-white">Browse Cars</a></li>
-            <li><a href="/book" className="hover:text-white">Book Test Drive</a></li>
-            <li><a href="/support" className="hover:text-white">Support</a></li>
+            <li><a href="/models" className="hover:text-white">Browse Cars</a></li>
+            <li><a href="/book-test-drive" className="hover:text-white">Book Test Drive</a></li>
+            <li><a href="/contact" className="hover:text-white">Support</a></li>
             <li><a href="/contact" className="hover:text-white">Contact Us</a></li>
           </ul>
         </div>

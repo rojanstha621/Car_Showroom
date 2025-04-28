@@ -18,7 +18,6 @@ import CarCustomization from './Pages/CarCustomization';
 import UserDashboard from './Pages/UserDashboard';
 import BookTestDrive from './Pages/BookTestDrive';
 
-import ReviewConfirmation from './Pages/ReviewConfirmation';
 import Purchase from './Pages/Purchase';
 
 // import NotFound from './pages/NotFound';
@@ -29,24 +28,25 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Homepage />} />
-          <Route path="cars" element={<CarsListing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="models" element={<CarsListing />} />
+
           <Route path="offers" element={<OffersPromotions />} />
           <Route path="contact" element={<ContactSupport />} />
           <Route path="featured" element={<FeaturedCars />} />
           <Route path="testimonials" element={<Testimonials />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="car/:carid" element={<CarDetail />} />
+
           {/* <Route path="*" element={<NotFound />} /> */}
         </Route>
 
 
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/book-test-drive/:id" element={<BookTestDrive /> } />
+        <Route path="/purchase/:carId" element={<Purchase />} /> 
         <Route path="/customize/:id" element={<CarCustomization /> }/>
 
-        <Route path="/book-test-drive/:id" element={<BookTestDrive /> } />
-        <Route path="/review-confirmation" element={<ReviewConfirmation />} />
-        <Route path="/purchase/:carId" element={<Purchase />} /> 
       </Routes>
     </BrowserRouter>
   );

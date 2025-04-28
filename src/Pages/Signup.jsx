@@ -17,7 +17,7 @@ const Signup = () => {
 
     const user = { email, password };
     localStorage.setItem('royalUser', JSON.stringify(user));
-    navigate('/');
+    navigate('/login'); // Redirect to login after successful signup
   };
 
   return (
@@ -58,6 +58,17 @@ const Signup = () => {
         >
           Sign Up
         </button>
+
+        {/* 👇 Added this section */}
+        <p className="text-center text-sm mt-4">
+          Already have an account?{' '}
+          <span
+            className="text-royal-gold cursor-pointer"
+            onClick={() => navigate('/login')}
+          >
+            Login
+          </span>
+        </p>
       </form>
     </div>
   );

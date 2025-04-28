@@ -27,7 +27,7 @@
                 <img
                   src={car.image}
                   alt={car.name}
-                  className="w-full h-60 object-cover"
+                  className="w-full h-60 object-contain"
                 />
   
                 {/* Car Info */}

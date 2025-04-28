@@ -1,9 +1,14 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import dummyCars from './CarList';
 
 const CarDetail = () => {
   const { carid } = useParams();
   const navigate = useNavigate();
+
+  const [showOfferModal, setShowOfferModal] = useState(false);
+  const [voucher, setVoucher] = useState('');
+  const [message, setMessage] = useState('');
 
   const car = dummyCars.find((c) => c.id.toString() === carid);
 
@@ -14,6 +19,16 @@ const CarDetail = () => {
       </div>
     );
   }
+
+  const handleApplyVoucher = () => {
+    if (voucher.trim() === 'DISCOUNT50') {
+      setMessage('Congratulations! You received a 50% discount!');
+    } else if (voucher.trim() === 'FREESERVICE') {
+      setMessage('You received 1 year of free service!');
+    } else {
+      setMessage('Invalid voucher code. Please try again.');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white text-black px-6 py-10">
@@ -80,20 +95,58 @@ const CarDetail = () => {
 
             <button
               className="bg-silver text-black py-3 rounded font-semibold hover:bg-white transition"
-              onClick={() => navigate(`/apply-offer/${car.id}`)}
+              onClick={() => setShowOfferModal(true)}
             >
               Apply Offer
             </button>
 
             <button
               className="bg-white border border-black text-black py-3 rounded font-semibold hover:bg-silver transition"
-              onClick={() => navigate('/contact-support')}
+              onClick={() => navigate('/contact')}
             >
               Contact Sales
             </button>
           </div>
         </div>
       </div>
+
+      {/* Offer Modal */}
+      {showOfferModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 className="text-2xl font-bold mb-4 text-gold">Enter Voucher Code</h2>
+
+            <input
+              type="text"
+              value={voucher}
+              onChange={(e) => setVoucher(e.target.value)}
+              placeholder="Enter code..."
+              className="w-full p-2 border rounded mb-4"
+            />
+
+            {message && <p className="mb-4 text-center text-black">{message}</p>}
+
+            <div className="flex justify-between">
+              <button
+                className="bg-gold text-black py-2 px-4 rounded font-semibold hover:bg-black hover:text-white transition"
+                onClick={handleApplyVoucher}
+              >
+                Apply
+              </button>
+              <button
+                className="bg-red-500 text-white py-2 px-4 rounded font-semibold hover:bg-red-700 transition"
+                onClick={() => {
+                  setShowOfferModal(false);
+                  setVoucher('');
+                  setMessage('');
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
