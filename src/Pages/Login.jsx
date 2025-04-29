@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
@@ -8,6 +8,19 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      const parts = storedToken.split('+');
+      const emailFromToken = parts[0]?.replace('email: ', '') || '';
+      const passwordFromToken = parts[1]?.replace('password: ', '') || '';
+      
+      // Auto-fill the fields
+      setEmail(emailFromToken);
+      setPassword(passwordFromToken);
+    }
+  }, []);
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -16,22 +29,20 @@ const Login = () => {
       return;
     }
 
-    const storedUser = localStorage.getItem('royalUser');
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      const parts = storedToken.split('+');
+      const storedEmail = parts[0]?.replace('email: ', '') || '';
+      const storedPassword = parts[1]?.replace('password: ', '') || '';
 
-    if (!storedUser) {
-      setError('No account found. Please sign up first.');
-      return;
-    }
-
-    const { email: storedEmail, password: storedPassword } = JSON.parse(storedUser);
-
-    if (email !== storedEmail) {
-      setError('Email not registered');
-    } else if (password !== storedPassword) {
-      setError('Incorrect password');
+      if (email === storedEmail && password === storedPassword) {
+        localStorage.setItem('isLoggedIn', 'true');
+        navigate('/'); // or navigate('/dashboard')
+      } else {
+        setError('Invalid email or password');
+      }
     } else {
-      localStorage.setItem('loggedIn', 'true');
-      navigate('/');
+      setError('No account found. Please sign up first.');
     }
   };
 
@@ -41,9 +52,9 @@ const Login = () => {
         onSubmit={handleLogin}
         className="relative bg-royal-white text-royal-black p-8 rounded-lg shadow-lg w-full max-w-md"
       >
-        {/* Back Button inside the form */}
+        {/* Back Button */}
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate('/')}
           type="button"
           className="absolute top-4 left-4 bg-royal-gold text-royal-black p-2 rounded-full hover:scale-110 transition duration-300"
         >
@@ -58,7 +69,7 @@ const Login = () => {
           <label className="block mb-1 font-medium">Email</label>
           <input
             type="email"
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-royal-gold"
+            className="w-full px-4 py-2 text-black rounded-md border border-gray-300 focus:outline-none focus:border-royal-gold"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

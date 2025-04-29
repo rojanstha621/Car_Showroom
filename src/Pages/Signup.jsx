@@ -15,9 +15,9 @@ const Signup = () => {
       return;
     }
 
-    const user = { email, password };
-    localStorage.setItem('royalUser', JSON.stringify(user));
-    navigate('/login'); // Redirect to login after successful signup
+    const token = `email: ${email}+password: ${password}`;
+    localStorage.setItem("token", token);
+    navigate("/login"); // Redirect to login after successful signup
   };
 
   return (

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
+import { FaUserCircle } from 'react-icons/fa'; // <-- Import Profile Icon
 import logo from '../assets/logo.png';
 
 const Navbar = () => {
@@ -13,18 +14,18 @@ const Navbar = () => {
 
   return (
     <nav className="bg-black text-white shadow-md px-6 md:px-20 transition-all duration-300">
-      <div className="container mx-auto flex justify-between items-center py-4">
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center">
+      <div className="container mx-auto flex justify-between items-center py-4 relative">
+        {/* Logo - Left */}
+        <Link to="/" className="flex items-center z-20">
           <img
             src={logo}
             alt="Logo"
-            className="h-16 w-auto hover:scale-105 transition-transform duration-300"
+            className="h-14 w-auto hover:scale-105 transition-transform duration-300"
           />
         </Link>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-10 text-sm font-semibold tracking-wide">
+        {/* Center Nav Links (Desktop) */}
+        <ul className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-10 text-sm font-semibold tracking-wide">
           {navItems.map((item, idx) => {
             const path = `/${item.toLowerCase()}`;
             const isActive = location.pathname === path;
@@ -50,13 +51,23 @@ const Navbar = () => {
           })}
         </ul>
 
-        {/* Mobile Toggle Button */}
-        <button
-          className="md:hidden text-gold text-3xl focus:outline-none transition-transform duration-300 hover:rotate-90"
-          onClick={toggleMenu}
-        >
-          {menuOpen ? <HiOutlineX /> : <HiOutlineMenu />}
-        </button>
+        {/* Profile Icon - Right */}
+        <div className="hidden md:flex items-center space-x-6 z-20">
+          <Link
+            to="/profile"
+            className="text-gold text-3xl hover:scale-110 transition-transform duration-300"
+            title="Profile"
+          >
+            <FaUserCircle />
+          </Link>
+          {/* Mobile Toggle Button (Visible only on small screens) */}
+          <button
+            className="md:hidden text-gold text-3xl focus:outline-none transition-transform duration-300 hover:rotate-90"
+            onClick={toggleMenu}
+          >
+            {menuOpen ? <HiOutlineX /> : <HiOutlineMenu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -81,6 +92,17 @@ const Navbar = () => {
               </li>
             );
           })}
+          {/* Mobile Profile Link */}
+          <li>
+            <Link
+              to="/profile"
+              onClick={toggleMenu}
+              className="flex items-center gap-2 transition-colors duration-300 text-white hover:text-gold"
+            >
+              <FaUserCircle className="text-2xl" />
+              Profile
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
