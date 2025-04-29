@@ -28,28 +28,9 @@ const CarList = [
       Seating: '2',
     }
   },
+
   {
     id: 2,
-    name: 'Tesla Model 3',
-    price: '$55,000',
-    year: 2023,
-    mileage: '12,000 km',
-    fuel: 'Electric',
-    image: image2,
-    highlight: 'Innovative tech meets electric performance in this futuristic ride.',
-    tags: ['Electric', 'Autopilot', 'Minimalist', '2023'],
-    specs: {
-      Battery: '82 kWh Long Range',
-      Range: '358 miles (EPA)',
-      Acceleration: '0–60 mph in 3.1s',
-      Drive: 'Dual Motor AWD',
-      Charging: 'Supercharging Support',
-      Infotainment: '15" Touchscreen Display',
-      Seating: '5',
-    }
-  },
-  {
-    id: 3,
     name: 'BMW 3 Series',
     price: '$50,000',
     year: 2021,
@@ -66,6 +47,27 @@ const CarList = [
       Interior: 'Leatherette Upholstery',
       Infotainment: '8.8" iDrive Display',
       MPG: '42 highway',
+    }
+  },
+
+  {
+    id: 3,
+    name: 'Tesla Model 3',
+    price: '$55,000',
+    year: 2023,
+    mileage: '12,000 km',
+    fuel: 'Electric',
+    image: image2,
+    highlight: 'Innovative tech meets electric performance in this futuristic ride.',
+    tags: ['Electric', 'Autopilot', 'Minimalist', '2023'],
+    specs: {
+      Battery: '82 kWh Long Range',
+      Range: '358 miles (EPA)',
+      Acceleration: '0–60 mph in 3.1s',
+      Drive: 'Dual Motor AWD',
+      Charging: 'Supercharging Support',
+      Infotainment: '15" Touchscreen Display',
+      Seating: '5',
     }
   },
   {

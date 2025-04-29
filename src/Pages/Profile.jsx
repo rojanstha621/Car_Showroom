@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import profilePic from "../assets/logo.png"; // Your default profile image
 import { FaCog, FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-
+      <Navbar />
       <main className="max-w-5xl mx-auto p-6 pt-24">
         {/* Profile Card */}
         <section className="bg-[#121212] p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-8 mb-10">

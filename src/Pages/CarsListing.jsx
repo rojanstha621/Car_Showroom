@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import dummyCars from './CarList';
 import PlaySound from '../components/PlaySound';
+import Popup from '../components/Popup';
 
 const CarsListing = () => {
   const navigate = useNavigate();
@@ -37,12 +38,12 @@ const CarsListing = () => {
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
-
   };
 
   return (
     <div className="min-h-screen bg-gray-50 font-body px-4 md:px-12 py-10 text-[#2c2c2c]">
       <div className="flex flex-col md:flex-row gap-6">
+        {/* Sidebar Car List */}
         <div className="md:w-1/4 space-y-4">
           {dummyCars.map((car) => (
             <div
@@ -67,6 +68,7 @@ const CarsListing = () => {
           </div>
         </div>
 
+        {/* Main Car Display */}
         <div className="md:w-3/4 bg-white p-6 rounded-xl shadow relative">
           <div className="rounded overflow-hidden shadow mb-6">
             <img
@@ -125,21 +127,13 @@ const CarsListing = () => {
         </div>
       </div>
 
-      {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center space-y-4">
-            <p className="text-lg font-semibold">{popupMessage}</p>
-            <button
-              onClick={() => setShowPopup(false)}
-              className="mt-4 px-6 py-2 bg-[#594E4E] text-white rounded hover:bg-[#463a3a] transition"
-            >
-              OK
-            </button>
-          </div>
-        </div>
-      )}
-
+      {/* Global Components */}
       <PlaySound play={!isMuted} />
+      <Popup
+        show={showPopup}
+        message={popupMessage}
+        onClose={() => setShowPopup(false)}
+      />
     </div>
   );
 };

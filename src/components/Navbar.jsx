@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  const navItems = ['Models', 'Offers', 'Featured', 'Testimonials', 'About', 'Contact'];
+  const navItems = ['Models', 'Offers', 'Featured', 'Favourites', 'About', 'Contact'];
 
   return (
     <nav className="bg-black text-white shadow-md px-6 md:px-20 transition-all duration-300">

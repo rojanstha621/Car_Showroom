@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import Popup from '../components/Popup';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [popupMessage, setPopupMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +28,9 @@ const Login = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError('Please enter both email and password');
+      setPopupMessage('Please enter both email and password');
+      setIsError(true);
+      setShowPopup(true);
       return;
     }
 
@@ -37,12 +42,21 @@ const Login = () => {
 
       if (email === storedEmail && password === storedPassword) {
         localStorage.setItem('isLoggedIn', 'true');
-        navigate('/'); // or navigate('/dashboard')
+        setPopupMessage('Login successful! Redirecting...');
+        setIsError(false);
+        setShowPopup(true);
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
       } else {
-        setError('Invalid email or password');
+        setPopupMessage('Invalid email or password');
+        setIsError(true);
+        setShowPopup(true);
       }
     } else {
-      setError('No account found. Please sign up first.');
+      setPopupMessage('No account found. Please sign up first.');
+      setIsError(true);
+      setShowPopup(true);
     }
   };
 
@@ -62,8 +76,6 @@ const Login = () => {
         </button>
 
         <h2 className="text-2xl font-bold text-center mb-6 text-royal-gold">Login to Royal Oak</h2>
-
-        {error && <p className="text-red-600 mb-4 text-sm text-center">{error}</p>}
 
         <div className="mb-4">
           <label className="block mb-1 font-medium">Email</label>
@@ -104,6 +116,13 @@ const Login = () => {
           </span>
         </p>
       </form>
+
+      {/* Popup Message */}
+      <Popup
+        show={showPopup}
+        message={popupMessage}
+        onClose={() => setShowPopup(false)}
+      />
     </div>
   );
 };
